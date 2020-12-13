@@ -4,7 +4,7 @@ const app: express.Application = express();
 app.get('/', function (req, res) {
 res.send('Node Express TypeScript');
 });
-app.get('/comminglevel', function (req, res) {
+app.get('/cominglevel', function (req, res) {
     res.send('Routing test for this');
     });
     
