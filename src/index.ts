@@ -1,17 +1,22 @@
-import express, {Request, Response, Application} from 'express';
-// Create a new express app instance
-const app: Application = express();
-app.get('/',  (req:Request, res:Response)=> {
-res.send('Node Express TypeScript');
-});
-app.get('/cominglevel', (req:Request, res:Response) =>{
-    res.send('Routing test for this');
-    });
-    
+import express from 'express';
+import mongoose from 'mongoose'
+import { json } from 'body-parser';
+import { ProductRouter } from './routes/ProductRoute'
 
-const PORT :number=4000;
-app.listen(PORT, function () {
-console.log(`App is listening on port ${PORT}!`);
-});
-// npm run tsc  
-// node src/index.js
+const app = express()
+app.use(json())
+app.use(ProductRouter)
+
+mongoose.connect('mongodb://localhost:27017/cominglevel', {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+}, () => {
+  console.log('connected to database')
+})
+
+const port= 3500
+
+app.listen(port, () => {
+  console.log(`server is listening on port ${port}`)
+})
